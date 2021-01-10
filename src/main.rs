@@ -5,7 +5,7 @@ use serenity::{
     client::bridge::gateway::ShardManager,
     framework::{standard::macros::group, StandardFramework},
     http::Http,
-    model::{event::ResumedEvent, gateway::Ready, interactions::Interaction},
+    model::{event::ResumedEvent, gateway::{Ready,Activity}, interactions::Interaction},
     prelude::*,
 };
 use std::{collections::HashSet, env, sync::Arc};
@@ -28,6 +28,10 @@ impl EventHandler for Handler {
     async fn ready(&self, _ctx: Context, ready: Ready) {
         info!("Connected as {}", ready.user.name);
 
+         _ctx.set_activity(Activity::listening(&String::from(
+            "!room !room",
+        ))).await;
+
     // ctx.http.create_guild_application_command();
 
     }
@@ -40,7 +44,7 @@ impl EventHandler for Handler {
 }
 
 #[group]
-#[commands(multiply, ping, quit, room)]
+#[commands(multiply, ping, quit, room, rooms)]
 struct General;
 
 #[tokio::main]
@@ -76,7 +80,7 @@ async fn main() {
 
     // Create the framework
     let framework = StandardFramework::new()
-        .configure(|c| c.owners(owners).prefix("~"))
+        .configure(|c| c.owners(owners).prefix("!"))
         .group(&GENERAL_GROUP);
 
     let mut client = Client::builder(&token)

@@ -3,8 +3,17 @@ use serenity::model::prelude::*;
 use serenity::prelude::*;
 
 #[command]
+async fn rooms(ctx: &Context, msg: &Message) -> CommandResult {
+    room_command(ctx, msg).await
+}
+
+#[command]
 async fn room(ctx: &Context, msg: &Message) -> CommandResult {
-    let channel_op = msg.channel(&ctx).await;
+    room_command(ctx, msg).await
+}
+
+async fn room_command(ctx: &Context, msg: &Message) -> CommandResult{
+  let channel_op = msg.channel(&ctx).await;
     match channel_op {
         Some(channel) => {
             match channel.guild() {
@@ -17,7 +26,8 @@ async fn room(ctx: &Context, msg: &Message) -> CommandResult {
                             'A'..='Z' => Some(x),
                             'a'..='z' => Some(x),
                             '0'..='9' => Some(x),
-                            ' ' | '-' | '_' => Some('-'),
+                            ' ' | '-' | ',' => Some('-'),
+                            '_' => Some('_'),
                             _ => None,
                         })
                         .collect();
@@ -26,7 +36,7 @@ async fn room(ctx: &Context, msg: &Message) -> CommandResult {
 
                     match parent_guild_op {
                         Some(parent_guild) => {
-                            println!("It's a guild channel named {}!", channel_guild.name);
+                            // println!("It's a guild channel named {}!", channel_guild.name);
                             let guild_name = &parent_guild.name;
 
                             let guild_name: String = guild_name
@@ -35,7 +45,8 @@ async fn room(ctx: &Context, msg: &Message) -> CommandResult {
                                     'A'..='Z' => Some(x),
                                     'a'..='z' => Some(x),
                                     '0'..='9' => Some(x),
-                                    ' ' | '-' | '_' => Some('-'),
+                                    ' ' | '-' | ',' => Some('-'),
+                                    '_' => Some('_'),
                                     _ => None,
                                 })
                                 .collect();
@@ -51,7 +62,7 @@ async fn room(ctx: &Context, msg: &Message) -> CommandResult {
                                 .await?;
                         }
                         None => {
-                            println!("Parent guild name not found!");
+                            // println!("Parent guild name not found!");
 
                             msg.channel_id
                                 .say(
@@ -63,7 +74,7 @@ async fn room(ctx: &Context, msg: &Message) -> CommandResult {
                     };
                 }
                 None => {
-                    println!("It's not a guild channel!");
+                    // println!("It's not a guild channel!");
                     msg.channel_id
                         .say(&ctx.http, format!("https://www.mossylogs.com/r/general"))
                         .await?;
@@ -71,7 +82,7 @@ async fn room(ctx: &Context, msg: &Message) -> CommandResult {
             };
         }
         None => {
-            println!("Channel for message not found");
+            // println!("Channel for message not found");
             msg.channel_id
                 .say(&ctx.http, format!("https://www.mossylogs.com/r/general"))
                 .await?;
