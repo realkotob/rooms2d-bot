@@ -5,7 +5,7 @@ use serenity::{
     client::bridge::gateway::ShardManager,
     framework::{standard::macros::group, StandardFramework},
     http::Http,
-    model::{event::ResumedEvent, gateway::Ready},
+    model::{event::ResumedEvent, gateway::Ready, interactions::Interaction},
     prelude::*,
 };
 use std::{collections::HashSet, env, sync::Arc};
@@ -25,8 +25,11 @@ struct Handler;
 
 #[async_trait]
 impl EventHandler for Handler {
-    async fn ready(&self, _: Context, ready: Ready) {
+    async fn ready(&self, _ctx: Context, ready: Ready) {
         info!("Connected as {}", ready.user.name);
+
+    // ctx.http.create_guild_application_command();
+
     }
 
     async fn resume(&self, _: Context, _: ResumedEvent) {
@@ -86,6 +89,7 @@ async fn main() {
         let mut data = client.data.write().await;
         data.insert::<ShardManagerContainer>(client.shard_manager.clone());
     }
+
 
     let shard_manager = client.shard_manager.clone();
 
