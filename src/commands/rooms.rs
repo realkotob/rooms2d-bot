@@ -18,7 +18,7 @@ async fn room_command(ctx: &Context, msg: &Message) -> CommandResult{
         Some(channel) => {
             match channel.guild() {
                 Some(channel_guild) => {
-                    println!("It's a guild channel named {}!", channel_guild.name);
+                    // println!("It's a guild channel named {}!", channel_guild.name);
                     let channel_name = &channel_guild.name;
                     let channel_name: String = channel_name
                         .chars()
