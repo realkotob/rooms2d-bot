@@ -3,7 +3,10 @@
 
 Discord bot for the [Rooms2D app](https://github.com/asheraryam/rooms2d).
 
-Invite the bot to your discord [**with this link**](https://discord.com/api/oauth2/authorize?client_id=797931723907268698&permissions=8&redirect_uri=https%3A%2F%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D797931723907268698%26permissions%3D68672%26scope%3Dbot&scope=bot).
+Invite the bot to your discord [with this link](https://discord.com/api/oauth2/authorize?client_id=797931723907268698&permissions=8&redirect_uri=https%3A%2F%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D797931723907268698%26permissions%3D68672%26scope%3Dbot&scope=bot).
+
+[Join the Discord](https://discord.gg/Egnyj8hbm5) to learn secret features and follow development!
+
 
 ## Development
 
