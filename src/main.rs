@@ -48,7 +48,7 @@ impl EventHandler for Handler {
         if (msg.content == "! Room"
             || msg.content == "! room"
             || msg.content == "! Rooms"
-            || msg.content == "! room")
+            || msg.content == "! rooms")
         {
             let _ = commands::rooms::room_command(&ctx, &msg).await;
         } else if (msg.content == "!help"
